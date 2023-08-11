@@ -44,3 +44,27 @@ jobs:
           plugin_languages_recent_load: 300
           plugin_languages_sections: most-used
           plugin_languages_threshold: 0%
+      - uses: actions/checkout@v3
+      - name: Install chrome dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgconf-2-4 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libgbm-dev libnss3-dev libxss-dev libasound2
+      - uses: browser-actions/setup-chrome@v1
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18 
+      - name: Build Template
+        working-directory: ./readme-builder
+        env:
+          PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
+          PUPPETEER_EXECUTABLE_PATH: ${{ steps.setup-chrome.outputs.chrome-path }}
+        run: |
+          npm ci
+          npm run start
+      - name: Commit new readme image
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add readme.webp
+          git commit -m "updated readme.webp"
+          git push
