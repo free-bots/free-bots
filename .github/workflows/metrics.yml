@@ -75,21 +75,22 @@ jobs:
       #     plugin_languages_recent_load: 300
       #     plugin_languages_sections: most-used
       #     plugin_languages_threshold: 0%
+      - name: Remove readme image
+        working-directory: repo
+        run: rm readme.webp
+      - uses: EndBug/add-and-commit@v9
+        with:
+          message: removed readme.webp
+          add: readme.webp
+          cwd: repo
+          default_author: github_actions
       - name: build template
         working-directory: repo
         run: |
-          git status
           cd ./readme-builder
           npm ci
           npm run start
           cd ..
-          git status
-      - name: modify
-        working-directory: repo
-        run: |
-          pwd
-          date > text.txt
-          git status
       - uses: EndBug/add-and-commit@v9
         with:
           message: updated readme.webp
