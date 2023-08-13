@@ -70,7 +70,10 @@ jobs:
       #     npm run start
       # - name: test1
       #   run: pwd
-      - run: touch text.txt
+      - run: |
+          pwd
+          touch text.txt
+          git status
       - uses: EndBug/add-and-commit@v9
         with:
           message: updated readme.webp
