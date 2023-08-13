@@ -1,4 +1,5 @@
 import puppeteer from 'puppeteer';
+import fs from 'fs';
 import path, { join } from 'path';
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
@@ -17,12 +18,16 @@ const __dirname = path.dirname(__filename);
     const url = join(__dirname, 'template', 'index.html');
     console.log(`Index.html is located at ${url}`);
     await page.goto(`file://${url}`);
+    const readmeImagePath = join(__dirname, '..', 'readme.webp');
     await page.screenshot({
         optimizeForSpeed: false,
         quality: 100,
         type: 'webp',
-        path: join(__dirname, '..', 'readme.webp')
+        path: readmeImagePath
     });
-    console.log('Created readme image');
     await browser.close();
+    if (!fs.existsSync(readmeImagePath)) {
+        throw new Error('Readme image not created');
+    }
+    console.log('Created readme image');
 })();

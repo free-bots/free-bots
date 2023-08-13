@@ -78,6 +78,7 @@ jobs:
         run: |
           npm ci
           npm run start
+          git status
       - name: modify
         working-directory: repo
         run: |
