@@ -26,7 +26,7 @@ jobs:
           curl --no-progress-meter \
             --output /tmp/${CHROME_DOWNLOAD} \
             https://dl.google.com/linux/direct/${CHROME_DOWNLOAD}
-          apt-get install -y /tmp/${CHROME_DOWNLOAD}
+          sudo apt-get install -y /tmp/${CHROME_DOWNLOAD}
           which google-chrome-stable
       # - uses: browser-actions/setup-chrome@v1
       #   env:
