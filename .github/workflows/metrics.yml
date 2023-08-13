@@ -15,12 +15,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           path: repo
-          sparse-checkout: |
-            readme-builder
       - name: Install chrome dependencies
-        # run: |
-        #   sudo apt-get update
-        #   sudo apt-get install -y libgconf-2-4 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libgbm-dev libnss3-dev libxss-dev libasound2
         run: |
           sudo apt-get update
           sudo apt-get install -y fonts-liberation libcairo2 libgbm1 libgtk-3-0 libpango-1.0-0 libxdamage1 libxkbcommon0 xdg-utils libu2f-udev
@@ -31,18 +26,9 @@ jobs:
           sudo apt-get install -y /tmp/${CHROME_DOWNLOAD}
           PUPPETEER_SKIP_DOWNLOAD=true
           PUPPETEER_EXECUTABLE_PATH=$(which google-chrome-stable)
-      # - uses: browser-actions/setup-chrome@v1
-      #   env:
-      #     PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
-      #     PUPPETEER_EXECUTABLE_PATH: ${{ steps.setup-chrome.outputs.chrome-path }}
       - uses: actions/setup-node@v3
         with:
           node-version: 18 
-      - name: cd
-        working-directory: repo
-        run: |
-          git status
-          ls -alh
       # - uses: lowlighter/metrics@latest
       #   with:
       #     # Your GitHub token
@@ -79,19 +65,19 @@ jobs:
         working-directory: repo
         run: rm readme.webp
       - uses: EndBug/add-and-commit@v9
+        name: Commit delete readme image
         with:
           message: removed readme.webp
           add: readme.webp
           cwd: repo
           default_author: github_actions
-      - name: build template
-        working-directory: repo
+      - name: Build template
+        working-directory: repo/readme-builder
         run: |
-          cd ./readme-builder
           npm ci
           npm run start
-          cd ..
       - uses: EndBug/add-and-commit@v9
+        name: Commit new readme image
         with:
           message: updated readme.webp
           add: readme.webp
