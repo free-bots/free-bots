@@ -76,6 +76,8 @@ jobs:
       - name: build template
         working-directory: repo
         run: |
+          rm readme.webp
+          git status
           cd ./readme-builder
           npm ci
           npm run start
