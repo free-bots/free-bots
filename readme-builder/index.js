@@ -29,5 +29,5 @@ const __dirname = path.dirname(__filename);
     if (!fs.existsSync(readmeImagePath)) {
         throw new Error('Readme image not created');
     }
-    console.log('Created readme image');
+    console.log(`Created readme image at: ${readmeImagePath}`);
 })();
