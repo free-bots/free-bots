@@ -12,6 +12,9 @@ jobs:
     permissions:
       contents: write
     steps:
+      - uses: actions/checkout@v3
+        with:
+          path: repo
       - name: Install chrome dependencies
         run: |
           sudo apt-get update
@@ -23,9 +26,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18 
-      - uses: actions/checkout@v3
-        with:
-          path: repo
       - name: cd
         working-directory: repo
         run: |
