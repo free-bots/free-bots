@@ -87,6 +87,6 @@ jobs:
       - uses: EndBug/add-and-commit@v9
         with:
           message: updated readme.webp
-          add: text.txt
+          add: readme.webp
           cwd: repo
           default_author: github_actions
