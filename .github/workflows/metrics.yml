@@ -12,6 +12,14 @@ jobs:
     permissions:
       contents: write
     steps:
+      - uses: actions/checkout@v3
+        with:
+          path: repo
+      - name: cd
+        working-directory: repo
+        run: |
+          git status
+          ls -alh
       # - uses: lowlighter/metrics@latest
       #   with:
       #     # Your GitHub token
@@ -44,24 +52,28 @@ jobs:
       #     plugin_languages_recent_load: 300
       #     plugin_languages_sections: most-used
       #     plugin_languages_threshold: 0%
-      - name: Install chrome dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libgconf-2-4 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libgbm-dev libnss3-dev libxss-dev libasound2
-      - uses: browser-actions/setup-chrome@v1
-        env:
-          PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
-          PUPPETEER_EXECUTABLE_PATH: ${{ steps.setup-chrome.outputs.chrome-path }}
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18 
-      - uses: actions/checkout@v3
-      - run: |
-          cd ./readme-builder
-          npm ci
-          npm run start
+      # - name: Install chrome dependencies
+      #   run: |
+      #     sudo apt-get update
+      #     sudo apt-get install -y libgconf-2-4 libatk1.0-0 libatk-bridge2.0-0 libgdk-pixbuf2.0-0 libgtk-3-0 libgbm-dev libnss3-dev libxss-dev libasound2
+      # - uses: browser-actions/setup-chrome@v1
+      #   env:
+      #     PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
+      #     PUPPETEER_EXECUTABLE_PATH: ${{ steps.setup-chrome.outputs.chrome-path }}
+      # - uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 18 
+      # - name: test
+      #   run: |
+      #     cd ./pathToRepo/readme-builder
+      #     npm ci
+      #     npm run start
+      # - name: test1
+      #   run: pwd
+      - run: touch text.txt
       - uses: EndBug/add-and-commit@v9
         with:
           message: updated readme.webp
-          add: '../readme.webp'
+          add: text.txt
+          cwd: repo
           default_author: github_actions
