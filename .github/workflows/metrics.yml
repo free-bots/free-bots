@@ -74,10 +74,12 @@ jobs:
       #     plugin_languages_sections: most-used
       #     plugin_languages_threshold: 0%
       - name: build template
-        working-directory: repo/readme-builder
+        working-directory: repo
         run: |
+          cd ./readme-builder
           npm ci
           npm run start
+          cd ..
           git status
       - name: modify
         working-directory: repo
