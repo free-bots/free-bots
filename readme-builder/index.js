@@ -18,7 +18,7 @@ const __dirname = path.dirname(__filename);
     const url = join(__dirname, 'template', 'index.html');
     console.log(`Index.html is located at ${url}`);
     await page.goto(`file://${url}`);
-    const readmeImagePath = join(__dirname, '..', 'readme.webp');
+    const readmeImagePath = join(__dirname, '..', 'readme_1.webp');
     await page.screenshot({
         optimizeForSpeed: false,
         quality: 100,
