@@ -27,7 +27,8 @@ jobs:
             --output /tmp/${CHROME_DOWNLOAD} \
             https://dl.google.com/linux/direct/${CHROME_DOWNLOAD}
           sudo apt-get install -y /tmp/${CHROME_DOWNLOAD}
-          which google-chrome-stable
+          PUPPETEER_SKIP_DOWNLOAD=true
+          PUPPETEER_EXECUTABLE_PATH=$(which google-chrome-stable)
       # - uses: browser-actions/setup-chrome@v1
       #   env:
       #     PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
@@ -72,11 +73,11 @@ jobs:
       #     plugin_languages_recent_load: 300
       #     plugin_languages_sections: most-used
       #     plugin_languages_threshold: 0%
-      # - name: build template
-      #   working-directory: repo/readme-builder
-      #   run: |
-      #     npm ci
-      #     npm run start
+      - name: build template
+        working-directory: repo/readme-builder
+        run: |
+          npm ci
+          npm run start
       - name: modify
         working-directory: repo
         run: |
