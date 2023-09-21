@@ -14,7 +14,7 @@ const __dirname = path.dirname(__filename);
         ]
     });
     const page = await browser.newPage();
-    await page.setViewport({ width: 800, height: 1000, deviceScaleFactor: 2 });
+    await page.setViewport({ width: 800, height: 1200, deviceScaleFactor: 2 });
     const url = join(__dirname, 'template', 'index.html');
     console.log(`Index.html is located at ${url}`);
     await page.goto(`file://${url}`);
