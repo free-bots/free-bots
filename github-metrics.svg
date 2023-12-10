@@ -19,7 +19,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
                                 <path fill-rule="evenodd" d="M10.5 7.75a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zm1.43.75a4.002 4.002 0 01-7.86 0H.75a.75.75 0 110-1.5h3.32a4.001 4.001 0 017.86 0h3.32a.75.75 0 110 1.5h-3.32z"/>
                             </svg>
-                            774 Commits
+                            776 Commits
                         </div>
                         <div class="field">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
@@ -103,14 +103,14 @@
                         <rect x="0" y="0" width="460" height="8" fill="white" rx="5"/>
                     </mask>
                     <rect mask="url(#languages-bar)" x="0" y="0" width="0" height="8" fill="#d1d5da"/>
-                    <rect mask="url(#languages-bar)" x="0" y="0" width="183.557985887735" height="8" fill="#A97BFF"/>
-                    <rect mask="url(#languages-bar)" x="183.557985887735" y="0" width="125.51251416842815" height="8" fill="#3178c6"/>
-                    <rect mask="url(#languages-bar)" x="309.07050005616316" y="0" width="49.82523052415525" height="8" fill="#00ADD8"/>
-                    <rect mask="url(#languages-bar)" x="358.8957305803184" y="0" width="41.28322560222202" height="8" fill="#f1e05a"/>
-                    <rect mask="url(#languages-bar)" x="400.1789561825404" y="0" width="36.76796454574232" height="8" fill="#41b883"/>
-                    <rect mask="url(#languages-bar)" x="436.94692072828275" y="0" width="9.359331760765452" height="8" fill="#b07219"/>
-                    <rect mask="url(#languages-bar)" x="446.3062524890482" y="0" width="7.978331239979986" height="8" fill="#178600"/>
-                    <rect mask="url(#languages-bar)" x="454.28458372902816" y="0" width="5.715416270971827" height="8" fill="#e34c26"/>
+                    <rect mask="url(#languages-bar)" x="0" y="0" width="182.14256763603203" height="8" fill="#A97BFF"/>
+                    <rect mask="url(#languages-bar)" x="182.14256763603203" y="0" width="124.5446853784578" height="8" fill="#3178c6"/>
+                    <rect mask="url(#languages-bar)" x="306.6872530144898" y="0" width="49.44102745972236" height="8" fill="#00ADD8"/>
+                    <rect mask="url(#languages-bar)" x="356.12828047421215" y="0" width="40.96489005978316" height="8" fill="#f1e05a"/>
+                    <rect mask="url(#languages-bar)" x="397.09317053399536" y="0" width="36.484446245820244" height="8" fill="#41b883"/>
+                    <rect mask="url(#languages-bar)" x="433.57761677981557" y="0" width="11.463876785895227" height="8" fill="#178600"/>
+                    <rect mask="url(#languages-bar)" x="445.04149356571077" y="0" width="9.287161819839902" height="8" fill="#b07219"/>
+                    <rect mask="url(#languages-bar)" x="454.3286553855507" y="0" width="5.671344614449286" height="8" fill="#e34c26"/>
                 </svg>
                 <div class="row fill-width">
                     <section>
@@ -150,12 +150,12 @@
                         <div class="field language details">
                             <div class="field">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
-                                    <path fill="#178600" fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"/>
+                                    <path fill="#b07219" fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"/>
                                 </svg>
-                                C#
+                                Java
                             </div>
                             <small>
-                                <div>6.79 kB</div>
+                                <div>7.97 kB</div>
                             </small>
                         </div>
                     </section>
@@ -185,12 +185,12 @@
                         <div class="field language details">
                             <div class="field">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
-                                    <path fill="#b07219" fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"/>
+                                    <path fill="#178600" fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"/>
                                 </svg>
-                                Java
+                                C#
                             </div>
                             <small>
-                                <div>7.97 kB</div>
+                                <div>9.84 kB</div>
                             </small>
                         </div>
                         <div class="field language details">
@@ -303,7 +303,7 @@
                                     </defs>
                                     <svg xmlns="http://www.w3.org/2000/svg" class="gauge info">
                                         <circle class="gauge-base" r="25" cx="28" cy="28"/>
-                                        <circle class="gauge-arc" transform="rotate(-90 28 28)" r="25" cx="28" cy="28" stroke-dasharray="82.38021902806298 155"/>
+                                        <circle class="gauge-arc" transform="rotate(-90 28 28)" r="25" cx="28" cy="28" stroke-dasharray="82.59240246406571 155"/>
                                     </svg>
                                     <svg xmlns="http://www.w3.org/2000/svg" mask="url(#mask)">
                                         <g xmlns="http://www.w3.org/2000/svg" transform="translate(5 4)" fill="none" fill-rule="evenodd">
@@ -662,7 +662,7 @@
                                 <div class="title">
                                     <span class="prefix"></span>
                                     Inspirer
-                                    <span class="gh">ranked 4.97m out of 67.5m repositories</span>
+                                    <span class="gh">ranked 5.05m out of 63.7m repositories</span>
                                     <div class="value-wrapper">
                                         <div class="value">1</div>
                                     </div>
