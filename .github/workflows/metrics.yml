@@ -62,7 +62,7 @@ jobs:
           PUPPETEER_EXECUTABLE_PATH=$(which google-chrome-stable)
       - uses: actions/setup-node@v3
         with:
-          node-version: 18 
+          node-version: 20 
       - name: Pull latest changes
         working-directory: repo
         run: git pull 
