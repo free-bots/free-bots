@@ -68,7 +68,7 @@ jobs:
         run: git pull 
       - name: Remove readme image
         working-directory: repo
-        run: rm readme.webp
+        run: rm readme.webp 2> /dev/null
       - uses: EndBug/add-and-commit@v9
         name: Commit delete readme image
         with:
