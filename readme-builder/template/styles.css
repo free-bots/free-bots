@@ -11,18 +11,18 @@ body {
     height: 100%;
     padding: 25px 15px;
     padding-bottom: 25px;
-    background-image: url('./background.png');
+    background-image: url('./background-pattern.svg');
     background-position: center;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     background-size: cover;
 }
 
 .card {
-    backdrop-filter: blur(7px) saturate(200%);
-    -webkit-backdrop-filter: blur(7px) saturate(200%);
-    background-color: rgba(26, 118, 132, 0.36);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.125);
+    backdrop-filter: blur(3px) saturate(200%);
+    -webkit-backdrop-filter: blur(3px) saturate(200%);
+    background-color: #6b548e66;
+    border-radius: 20px;
+    border: 1px solid #6b548e;
 }
 
 .w-max-600 {
@@ -36,4 +36,25 @@ body {
 img {
     background: transparent;
     max-width: 498px;
+}
+
+h1, h2, h3 {
+    color: white !important;
+}
+
+h3 {
+    font-size: medium;
+}
+
+svg .field {
+    color: white;
+}
+
+small > div {
+    color: white;
+}
+
+section h2 {
+    font-weight: bold !important; 
+    font-size: large !important;
 }
