@@ -23,7 +23,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # output_action: none -> no commit, the file is written to /metrics_renders/<filename>
       - uses: gh-metrics/metrics@master
@@ -97,7 +97,7 @@ jobs:
             cp "$src" .
           done
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
@@ -111,7 +111,7 @@ jobs:
           npm ci
           npm run start
 
-      - uses: EndBug/add-and-commit@v9
+      - uses: EndBug/add-and-commit@v11
         name: Commit metrics and readme image
         with:
           add: "metrics.*.svg readme.webp"
