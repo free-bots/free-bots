@@ -1,47 +1,56 @@
 # Visit https://github.com/lowlighter/metrics#-documentation for full reference
+#
+# Renders the gh-metrics SVGs, builds readme.webp from them and commits everything in
+# ONE commit, but only if the build succeeded and the render passed validation
+# (see readme-builder/index.js). On any failure nothing is committed and the README
+# keeps showing the last good image.
 name: Metrics
 on:
-  # Schedule updates (each hour)
+  # Daily at 00:00 UTC
   schedule: [{cron: "0 0 * * *"}]
-  # Lines below let you run workflow manually and on each commit
+  # Manual runs and every push to the default branch
   workflow_dispatch:
   push: {branches: ["master", "main"]}
+
+# A scheduled run and a push must not race each other on the commit
+concurrency:
+  group: metrics
+  cancel-in-progress: false
+
 jobs:
   github-metrics:
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
+      - uses: actions/checkout@v4
+
+      # output_action: none -> no commit, the file is written to /metrics_renders/<filename>
       - uses: gh-metrics/metrics@master
         with:
           token: ${{ secrets.METRICS_TOKEN }}
-          # Options
           user: free-bots
           template: classic
           base: activity
           config_timezone: Europe/Berlin
           filename: metrics.activity.svg
-          # output_action: none
-          delay: 30
+          output_action: none
           plugins_errors_fatal: yes
 
       - uses: gh-metrics/metrics@master
         with:
           token: ${{ secrets.METRICS_TOKEN }}
-          # Options
           user: free-bots
           template: classic
           base: community
           config_timezone: Europe/Berlin
           filename: metrics.community.svg
-          # output_action: none
-          delay: 30
+          output_action: none
           plugins_errors_fatal: yes
 
       - uses: gh-metrics/metrics@master
         with:
           token: ${{ secrets.METRICS_TOKEN }}
-          # Options
           user: free-bots
           template: classic
           base: ""
@@ -51,15 +60,12 @@ jobs:
           plugin_achievements_secrets: yes
           plugin_achievements_threshold: C
           filename: metrics.achievements.svg
-          # output_action: none
-          delay: 30
+          output_action: none
           plugins_errors_fatal: yes
-        
 
       - uses: gh-metrics/metrics@master
         with:
           token: ${{ secrets.METRICS_TOKEN }}
-          # Options
           user: free-bots
           template: classic
           base: ""
@@ -76,51 +82,38 @@ jobs:
           plugin_languages_sections: most-used
           plugin_languages_threshold: 0%
           filename: metrics.languages.svg
-          # output_action: none
-          delay: 30
+          output_action: none
           plugins_errors_fatal: yes
 
-      - name: Wait 20s
-        run: sleep 20s
-      - uses: actions/checkout@v4
-        with:
-          path: repo
-      - name: Install chrome dependencies
+      - name: Collect metrics renders
         run: |
-          sudo apt-get update
-          sudo apt-get install -y fonts-liberation libcairo2 libgbm1 libgtk-3-0 libpango-1.0-0 libxdamage1 libxkbcommon0 xdg-utils
-          CHROME_DOWNLOAD=google-chrome-stable_current_amd64.deb
-          curl --no-progress-meter \
-            --output /tmp/${CHROME_DOWNLOAD} \
-            https://dl.google.com/linux/direct/${CHROME_DOWNLOAD}
-          sudo apt-get install -y /tmp/${CHROME_DOWNLOAD}
-          PUPPETEER_SKIP_DOWNLOAD=true
-          PUPPETEER_EXECUTABLE_PATH=$(which google-chrome-stable)
+          for f in activity community achievements languages; do
+            src="/metrics_renders/metrics.$f.svg"
+            if [ ! -s "$src" ]; then
+              echo "::error::gh-metrics render $src is missing or empty"
+              ls -la /metrics_renders || true
+              exit 1
+            fi
+            cp "$src" .
+          done
+
       - uses: actions/setup-node@v4
         with:
-          node-version: 20 
-      - name: Pull latest changes
-        working-directory: repo
-        run: git pull 
-      - name: Remove readme image
-        working-directory: repo
-        run: rm -f readme.webp
-      - uses: EndBug/add-and-commit@v9
-        name: Commit delete readme image
-        with:
-          message: removed readme.webp
-          add: readme.webp
-          cwd: repo
-          default_author: github_actions
-      - name: Build template
-        working-directory: repo/readme-builder
+          node-version: 24
+          cache: npm
+          cache-dependency-path: readme-builder/package-lock.json
+
+      # npm ci downloads Puppeteer's own Chrome; index.js exits non-zero (and leaves
+      # readme.webp untouched) if any image, font, icon or metrics section is broken.
+      - name: Build and validate readme image
+        working-directory: readme-builder
         run: |
           npm ci
           npm run start
+
       - uses: EndBug/add-and-commit@v9
-        name: Commit new readme image
+        name: Commit metrics and readme image
         with:
-          message: updated readme.webp
-          add: readme.webp
-          cwd: repo
+          add: "metrics.*.svg readme.webp"
+          message: "Update metrics and readme.webp"
           default_author: github_actions
